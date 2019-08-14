@@ -1,36 +1,44 @@
-use std::io;
-use rand::Rng;
-use std::cmp::Ordering;
-
 fn main() {
-    println!("Guess the number"); 
+    let tup = (500, 6.4, 1);
 
-    let secret_number = rand::thread_rng().gen_range(1, 101);
+    let (x, y, z) = tup;
 
-    println!("The secret number is: {}", secret_number);
+    println!("The value of y is: {}, {}, {}", x, y, z);
 
-    loop {
-        println!("Plese input your guess.");
+    let a = [1, 2, 3, 4, 5];
 
-        let mut guess = String::new();
+    println!("{}", a[1]);
+
+    let condition = true;
+
+    let number = if condition {
+        5
+    } else {
+        6
+    };
+
+    println!("{}", number);
 
 
-        io::stdin().read_line(&mut guess)
-        .expect("Failed to read line");
+    let s1 = String::from("hello");
+    let s2 = s1;
+    println!("{}", s2);
 
-        let guess: u32 = match guess.trim().parse() {
-            Ok(num) => num,
-            Err(_) => continue,
-        };
+    let s = String::from("hello");  // s 进入作用域
 
-        match guess.cmp(&secret_number) {
-            Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too big!"),
-            Ordering::Equal => {
-                println!("You win!");
-                break;
-                },
-        }
-    }
+    takes_ownership(s);             // s 的值移动到函数里 ...
+    // ... 所以到这里不再有效
 
+    let x = 5;                      // x 进入作用域
+
+    makes_copy(x);                  // x 应该移动函数里，
+
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
 }
