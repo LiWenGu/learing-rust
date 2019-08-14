@@ -1,43 +1,42 @@
-use std::collections::HashMap;
+use std::fs::File;
+use std::io::{ErrorKind, Read};
+use std::io;
 
 fn main() {
-    let v: Vec<i32> = Vec::new();
-
-    let v= vec![1,2,3,4];
-    let third: &i32 = &v[2];
-
-    println!("The third element is {}", third);
-
-    match v.get(2) {
-        Some(third) => println!("The third element is {}", third),
-        None => println!("There is no third element."),
-    };
-
-    let row = vec![
-        SpreadsheetCell::Int(3),
-        SpreadsheetCell::Text(String::from("blue")),
-        SpreadsheetCell::Float(10.12),
-    ];
-
-    let mut s1 = String::from("foo");
-    let s2 = "bar";
-    s1.push_str(s2);
-    println!("s2 is {}", s2);
-
-
-    let teams = vec![String::from("Blue"), String::from("Yellow")];
-    let initial_scores = vec![10, 50];
-    let mut scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
-
-    for (key, value) in &scores {
-        println!("{}, {}", key, value);
-    }
-    let key = String::from("Yello");
-    scores.entry(&key).or_insert(&50);
+    let f = File::open("hello.txt").map_err(|error| {
+        if error.kind() == ErrorKind::NotFound {
+            File::create("hello.txt").unwrap_or_else(|error| {
+                panic!("Tried to create file but there was a problem: {:?}", error);
+            })
+        } else {
+            panic!("There was a problem opeing the file: {:?}", error);
+        }
+    });
+    // not used
+    f.ok();
 }
 
-enum SpreadsheetCell {
-    Int(i32),
-    Float(f64),
-    Text(String),
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("hello.txt");
+
+    let mut f = match f {
+        OK(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
+}
+
+fn read_username_from_file2() -> Result<String, io::Error> {
+    let mut f = File::open("hello.txt")?;
+
+    let mut s = String::new();
+
+    f.read_to_string(&mut s)?;
+    Ok(s)
 }
