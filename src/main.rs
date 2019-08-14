@@ -1,20 +1,15 @@
 fn main() {
-    let u = build_user(String::from("sad"));
-    println!("{}", u.email);
+    let rect1 = Rectangle {width: 30, height: 50};
+
+    println!("rect1 is {:?}", area(&rect1));
 }
 
-struct User {
-    username: String,
-    email: String,
-    sign_in_count: u64,
-    active: bool,
+fn area(rect: &Rectangle) -> u32 {
+    rect.width * rect.height
 }
 
-fn build_user(email: String) -> User {
-    User {
-        email,
-        username: String::from("asdasd"),
-        active: true,
-        sign_in_count: 1
-    }
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
 }
