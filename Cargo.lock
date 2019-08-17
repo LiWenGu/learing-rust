@@ -34,6 +34,10 @@ version = "0.2.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
+name = "object-feature"
+version = "0.1.0"
+
+[[package]]
 name = "rand"
 version = "0.3.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"

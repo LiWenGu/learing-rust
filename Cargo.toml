@@ -5,4 +5,5 @@ members = [
     "add-one",
     "intelligent-point",
     "fearless-concurrent",
+    "object-feature",
 ]
