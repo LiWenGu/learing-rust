@@ -4,4 +4,5 @@ members = [
     "adder",
     "add-one",
     "intelligent-point",
+    "fearless-concurrent",
 ]
