@@ -6,4 +6,7 @@ members = [
     "intelligent-point",
     "fearless-concurrent",
     "object-feature",
+    "advance-feature",
+    "hello_macro",
+    "pancakes",
 ]
