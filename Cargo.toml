@@ -9,4 +9,5 @@ members = [
     "advance-feature",
     "hello_macro",
     "pancakes",
+    "web",
 ]
